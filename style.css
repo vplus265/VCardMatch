@@ -1,5 +1,4 @@
 body {
-  font-size: 10pt;
   margin: 0;
 }
 
@@ -97,7 +96,8 @@ body {
   border-radius: 0.5em;
   border: 1px solid #780050;
   padding: 0.5em;
-  box-shadow: 0 0 0.5em white;
+  margin-right: 0.5em;
+  box-shadow: 0 0 0.2em white;
   font-size: 14px;
   transition: all 0.2s ease;
 }
@@ -118,6 +118,16 @@ body {
   opacity: 0.4;
 }
 
+.mm_box {
+  abackground-color: red;
+  max-width: 100%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  overflow-y: auto;
+  border-top: 1px solid #750055;
+  border-bottom: 1px solid #750055;
+}
+
 .mm_btn {
   background-color: #780050;
   color: white;
@@ -126,7 +136,7 @@ body {
   text-align: center;
   border-radius: 0.2em;
   border: 1px solid white;
-  font-size: 15pt;
+  font-size: 30px;
   transition: all 0.2s ease;
 }
 
@@ -147,14 +157,11 @@ body {
   background-color: rgba(120, 0, 80, 0.1);
   color: #750055;
   border: 0;
-  padding: 0.8em;
+  padding: 0.4em;
+  margin: 0.4em;
   text-align: center;
   border-radius: 0.2em;
-  font-size: 15pt;
-}
-
-.back_to_menu_btn {
-  margin: 0.5em;
+  font-size: 15px;
 }
 
 .about_box {

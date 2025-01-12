@@ -108,7 +108,7 @@ class NoticePopup extends BaseScreen {
     );
   }
 
-  show(title, message, action_btn_data) {
+  show(title, message, action_buttons = []) {
     const info_box = document.createElement('div');
     info_box.classList.add('infobox');
 
@@ -122,18 +122,20 @@ class NoticePopup extends BaseScreen {
     info_element.classList.add('infobox_info');
     info_box.append(info_element);
 
-    const ok_btn = document.createElement('button');
-    ok_btn.innerText = action_btn_data.name;
-    ok_btn.classList.add('popup_btn');
-    ok_btn.onclick = () => {
-      setTimeout(() => {
-        this.hide();
-        action_btn_data.action();
-      }, 200);
-    };
+    action_buttons.forEach((v, i, a) => {
+      const btn = document.createElement('button');
+      btn.innerText = v.name;
+      btn.classList.add('popup_btn');
+      btn.onclick = () => {
+        setTimeout(() => {
+          this.hide();
+          v.action();
+        }, 200);
+      };
+      info_box.append(btn);
+    });
 
-    info_box.append(ok_btn);
-
+    // background to disable touch
     const scrn_fill_box = document.createElement('div');
     scrn_fill_box.classList.add('scrn_fill_box');
     scrn_fill_box.innerHTML = '...';

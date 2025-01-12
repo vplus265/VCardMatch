@@ -2,8 +2,8 @@ class MainMenuScreen extends BaseScreen {
   constructor(view) {
     super('main menu screen', view);
 
-    // menu items grid
-    this.cols = 1;
+    // for menu itemz
+    this.cols = 2;
 
     // sets `this.bg` property
     this.set_bg();
@@ -32,7 +32,7 @@ class MainMenuScreen extends BaseScreen {
 
     this.data.forEach((v, i, a) => {
       let btn = document.createElement('button');
-      btn.innerText = `${i} ${v.name}`;
+      btn.innerText = v.name;
       btn.classList.add('mm_btn');
       // delay a bit, the run action 
       btn.onclick = () => setTimeout(() => this.view.switch_to(v.scrn_name), 200);

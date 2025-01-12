@@ -28,13 +28,14 @@ class StatsScreen extends BaseScreen {
     this.gui_box = document.createElement('div');
     this.gui_box.style.width = "100%";
     this.gui_box.style.display = 'flex';
+    this.gui_box.style.padding = '0.5em';
     this.gui_box.style.alignContent = 'center';
     this.gui_box.style.justifyContent = 'center';
     this.gui_box.style.backgroundColor = 'rgba(120,0,80,0.08)';
 
     // the pause button
     let pause_btn = document.createElement('button');
-    pause_btn.classList.add('mm_btn', 'back_to_menu_btn');
+    pause_btn.classList.add('mm_btn');
     pause_btn.innerText = 'Back';
     pause_btn.style.fontSize = '14px';
     pause_btn.onclick = () => setTimeout(() => {
@@ -42,8 +43,39 @@ class StatsScreen extends BaseScreen {
     }, 200);
     this.gui_box.appendChild(pause_btn);
 
-  }
-
+    // the reset button
+    let reset_btn = document.createElement('button');
+    reset_btn.classList.add('mm_btn');
+    reset_btn.innerText = 'reset';
+    reset_btn.style.fontSize = '14px';
+    reset_btn.onclick = () => setTimeout(() => {
+      this.view.popups.notice.show(
+        'WARNING!',
+        '<p>Resetting will delete your whole progress, everything you have done so far.</p><p>Are you sure you want to delete?</p>',
+        [
+          { name: 'Cancel', action: () => 0 },
+          
+          {
+            name: 'Yes, Delete!',
+            action: () => {
+              GameStorage.clear(); 
+              
+              // refresh the play screen 
+              this.view.screens.play.refresh();
+              // and hide it, since refresh will show it
+              this.view.screens.play.hide();
+              
+              // refresh this stats screen 
+              this.hide();
+              this.show();
+            }
+          }, // Yes button
+        ]
+      );
+    }, 200);
+    this.gui_box.appendChild(reset_btn);
+  } 
+  
   hide() {
     this.is_running = false;
 

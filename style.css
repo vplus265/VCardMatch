@@ -119,11 +119,9 @@ body {
 }
 
 .mm_box {
-  abackground-color: red;
   max-width: 100%;
-  padding-top: 1em;
-  padding-bottom: 1em;
   overflow-y: auto;
+  padding: 1em;
   border-top: 1px solid #750055;
   border-bottom: 1px solid #750055;
 }

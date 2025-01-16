@@ -28,7 +28,8 @@ class StatsScreen extends BaseScreen {
     this.gui_box = document.createElement('div');
     this.gui_box.style.width = "100%";
     this.gui_box.style.display = 'flex';
-    this.gui_box.style.padding = '0.5em';
+    this.gui_box.style.paddingTop = '0.5em';
+    this.gui_box.style.paddingBottom = '0.5em';
     this.gui_box.style.alignContent = 'center';
     this.gui_box.style.justifyContent = 'center';
     this.gui_box.style.backgroundColor = 'rgba(120,0,80,0.08)';

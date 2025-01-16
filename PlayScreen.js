@@ -33,14 +33,15 @@ class PlayScreen extends BaseScreen {
     this.gui_box = document.createElement('div');
     this.gui_box.style.width = "100%";
     this.gui_box.style.display = 'flex';
-    this.gui_box.style.padding = '0.5em';
+    this.gui_box.style.paddingTop = '0.5em';
+    this.gui_box.style.paddingBottom = '0.5em';
     this.gui_box.style.alignContent = 'center';
     this.gui_box.style.justifyContent = 'center';
     this.gui_box.style.backgroundColor = 'rgba(120,0,80,0.08)';
 
     // the pause button
     let pause_btn = document.createElement('button');
-    pause_btn.classList.add('mm_btn',);
+    pause_btn.classList.add('mm_btn', );
     pause_btn.innerText = 'Pause';
     pause_btn.style.fontSize = '14px';
     pause_btn.onclick = () => setTimeout(() => {
@@ -125,6 +126,9 @@ class PlayScreen extends BaseScreen {
 
   // called when a level is won
   win() {
+    // el_main.innerHTML = '';
+    VisualEffects.confetti(el_main);
+
     // save level if this level is higher than any other won levels
     if (this.game_level.levels.indexOf(this.game_level.current_lvl) >= Number(GameStorage.read('last_level_index', 0)))
       GameStorage.save('last_level_index', 1 + this.game_level.levels.indexOf(this.game_level.current_lvl));
@@ -141,7 +145,11 @@ class PlayScreen extends BaseScreen {
       this.view.popups.notice.show('Won!',
         `<p>You have revealed a total of ${this.reveal_count*2} cards in ${this.play_time/1000} seconds. Click 'Next Level' to proceed!</p>`,
         [
-          { name: 'Next Level', action: () => this.refresh(1 + this.game_level.levels.indexOf(this.game_level.current_lvl)) }
+          {
+            name: 'Next Level',
+            action: () =>
+              this.refresh(1 + this.game_level.levels.indexOf(this.game_level.current_lvl))
+          }
         ]
       );
     }, 500);
@@ -235,5 +243,4 @@ class PlayScreen extends BaseScreen {
       this.last_card = card;
     }
   }
-
 }

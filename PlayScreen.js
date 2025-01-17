@@ -13,6 +13,7 @@ class PlayScreen extends BaseScreen {
     //%Start A: settings for reveal and init of cards
     this.last_card = null;
     this.reveal_count = 0;
+    this.wrong_reveal_count = 0;
     this.play_time = 0;
     // indicates if waiting after reveal to prevent more taps
     this.is_reveal_waiting = false;
@@ -96,6 +97,7 @@ class PlayScreen extends BaseScreen {
 
     // we haven't cleared any card
     this.reveal_count = 0;
+    this.wrong_reveal_count = 0;
     this.last_card = null;
     this.play_time = 0; // reset
 
@@ -135,6 +137,9 @@ class PlayScreen extends BaseScreen {
 
     // save total reveals
     GameStorage.save('total_reveals', this.reveal_count + Number(GameStorage.read('total_reveals', 0)));
+    
+    // save wrong reveals 
+    GameStorage.save('total_wrong_reveals', this.wrong_reveal_count + Number(GameStorage.read('total_wrong_reveals', 0)));
 
     // save total time from first level
     GameStorage.save('total_time', this.play_time + Number(GameStorage.read('total_time', 0)));
@@ -143,7 +148,7 @@ class PlayScreen extends BaseScreen {
     // delay a bit before showing the message 
     setTimeout(() => {
       this.view.popups.notice.show('Won!',
-        `<p>You have revealed a total of ${this.reveal_count*2} cards in ${this.play_time/1000} seconds. Click 'Next Level' to proceed!</p>`,
+        `<p>You have revealed a total of ${this.reveal_count*2} cards in ${this.play_time/1000} seconds. And wrong reveals count is ${this.wrong_reveal_count}. Click 'Next Level' to proceed!</p>`,
         [
           {
             name: 'Next Level',
@@ -233,6 +238,8 @@ class PlayScreen extends BaseScreen {
           saved_last_card.innerText = "?";
           card._revealed = false;
           card.innerText = "?";
+          
+          this.wrong_reveal_count++;
 
           // done veiling
           this.is_reveal_waiting = false;

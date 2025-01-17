@@ -16,5 +16,14 @@
 #### Done
 - Added class VisualEffects to implement confetti and call when wins.
 
-### 004 [ ] More Advanced Reset (16 January 2025)
+### 004 [X] More Advanced Reset (16 January 2025 - 17 January 2025)
 - Each stat must have a reset button on it's own
+
+#### Done
+- Added the more advanced reset feature and each stat has its own reset button
+
+### 005 [X] Stats: Add Total wrong reveals (16 January 2025)
+#### Done
+- Added the stat to show total cards wrongly got revealed 
+
+### 006 [ ] When waiting after clicked a card, then disable click on others (16 January 2025)

@@ -47,7 +47,7 @@ class StatsScreen extends BaseScreen {
     // the reset button
     let reset_btn = document.createElement('button');
     reset_btn.classList.add('mm_btn');
-    reset_btn.innerText = 'reset';
+    reset_btn.innerText = 'Reset all';
     reset_btn.style.fontSize = '14px';
     reset_btn.onclick = () => setTimeout(() => {
       this.view.popups.notice.show(
@@ -55,17 +55,17 @@ class StatsScreen extends BaseScreen {
         '<p>Resetting will delete your whole progress, everything you have done so far.</p><p>Are you sure you want to delete?</p>',
         [
           { name: 'Cancel', action: () => 0 },
-          
+
           {
             name: 'Yes, Delete!',
             action: () => {
-              GameStorage.clear(); 
-              
+              GameStorage.clear();
+
               // refresh the play screen 
               this.view.screens.play.refresh();
               // and hide it, since refresh will show it
               this.view.screens.play.hide();
-              
+
               // refresh this stats screen 
               this.hide();
               this.show();
@@ -75,8 +75,8 @@ class StatsScreen extends BaseScreen {
       );
     }, 200);
     this.gui_box.appendChild(reset_btn);
-  } 
-  
+  }
+
   hide() {
     this.is_running = false;
 
@@ -101,9 +101,11 @@ class StatsScreen extends BaseScreen {
 
   load_map() {
     const data = [
-      { name: 'Highest Level', value: GameStorage.read('last_level_index', 0), desc: 'This shows how far you are by indicating the highest level so far.' },
-      { name: 'Total Reveals', value: GameStorage.read('total_reveals', 0), desc: 'This shows how many pairs of cards you have revealed in total.' },
-      { name: 'Total Time', value: Utils.parse_time(GameStorage.read('total_time', 0)), desc: 'This shows total time you have used playing this game.' },
+      { name: 'Highest Level', def_value: 0, value: GameStorage.read('last_level_index', 0), id: 'last_level_index', desc: 'This shows how far you are by indicating the highest level so far.' },
+      { name: 'Total Reveals', def_value: 0, value: GameStorage.read('total_reveals', 0), id: 'total_reveals', desc: 'This shows how many pairs of cards you have revealed in total.' },
+      { name: 'Total Wrong Reveals', def_value: 0, value: GameStorage.read('total_wrong_reveals', 0), id: 'total_wrong_reveals', desc: 'This shows how many pairs of cards you have revealed WRONGLY in total.' },
+
+      { name: 'Total Time', def_value: 0, value: Utils.parse_time(GameStorage.read('total_time', 0)), id: 'total_time', desc: 'This shows total time you have used playing this game.' },
 
       ];
 
@@ -114,12 +116,54 @@ class StatsScreen extends BaseScreen {
     data.forEach((v, i, a) => {
       const card = document.createElement('div');
       card.classList.add('stats_card');
-
-      card.innerHTML = `<h4>${v.name}:<br> = ${v.value}</h4>`;
-      card.innerHTML += `<p>${v.desc}</p>`;
-
       this.cards_box.appendChild(card);
+
+      const h4 = document.createElement('h4');
+      h4.innerHTML = `${v.name}:<br> = ${v.value}`;
+      card.appendChild(h4);
+
+      const p = document.createElement('p');
+      p.innerHTML += `${v.desc}`;
+      card.appendChild(p);
+
+      const reset_btn = document.createElement('button');
+      reset_btn.classList.add('mm_btn');
+      reset_btn.innerText = 'Reset';
+      reset_btn.style = 'padding:0.5em; font-size: inherit';
+
+      // perform the reset after 200 milliseconds
+      reset_btn.onclick = () => setTimeout(() => {
+        this.view.popups.notice.show(
+          'WARNING!',
+          `<p>Resetting '${v.name}' will reset whole thing from database to it's default value; You cannot undo.</p> <p>This will also reset the Play Screen.</p> <p>Are you sure you want to delete?</p>`,
+        [
+            // cancel does nothing 
+            { name: 'Cancel', action: _ => _ },
+
+            {
+              name: 'Yes, Reset!',
+              action: () => {
+                // reset to default
+                GameStorage.save(v.id, v.def_value);
+
+                // refresh the play screen 
+                this.view.screens.play.refresh();
+                // and hide it, since refresh will show it
+                this.view.screens.play.hide();
+
+                // refresh this stats screen 
+                this.hide();
+                this.show();
+              }
+          }, // Yes button
+        ]
+        );
+      }, 200);
+
+      card.appendChild(reset_btn);
+
     });
+
 
   }
 }

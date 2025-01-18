@@ -27,3 +27,5 @@
 - Added the stat to show total cards wrongly got revealed 
 
 ### 006 [ ] When waiting after clicked a card, then disable click on others (16 January 2025)
+
+### 007 [ ] Add accuracy stat (18 January 2025)

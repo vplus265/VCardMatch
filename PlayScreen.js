@@ -137,7 +137,7 @@ class PlayScreen extends BaseScreen {
 
     // save total reveals
     GameStorage.save('total_reveals', this.reveal_count + Number(GameStorage.read('total_reveals', 0)));
-    
+
     // save wrong reveals 
     GameStorage.save('total_wrong_reveals', this.wrong_reveal_count + Number(GameStorage.read('total_wrong_reveals', 0)));
 
@@ -209,7 +209,7 @@ class PlayScreen extends BaseScreen {
     //console.log(`reveal: ${JSON.stringify(card)}`);
     if (card._revealed || this.is_reveal_waiting) return;
 
-    card.innerText = card._value;
+    card.innerHTML = `<span class="fas fa-${card._value}"></span>`;
     card._revealed = true;
 
 
@@ -238,7 +238,7 @@ class PlayScreen extends BaseScreen {
           saved_last_card.innerText = "?";
           card._revealed = false;
           card.innerText = "?";
-          
+
           this.wrong_reveal_count++;
 
           // done veiling

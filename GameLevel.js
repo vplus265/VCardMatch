@@ -1,7 +1,7 @@
 class GameLevel {
   constructor() {
     // current level
-   this.current_lvl = null;
+    this.current_lvl = null;
 
     // acceptable sizes
     this.sizes = [
@@ -18,22 +18,51 @@ class GameLevel {
         [8, 8],
         [9, 8],
         [10, 9]
-      ];
+    ];
 
-    this.levels = [ 
-      ...(this.make_lvls('.N1$X,A2&Y-B3%X+C4@')),
-      ...(this.make_lvls('AB')),
-      ...(this.make_lvls('XYMN')),
-      ...(this.make_lvls('AXBYCZDMN')),
-      ...(this.make_lvls('@#AXBYCZDMN')),
-      ...(this.make_lvls('12AX')),
-      ...(this.make_lvls('Q1A2B3C4')),
-      ...(this.make_lvls('PH1XA2YB3XC4@')),
-      ...(this.make_lvls('1$XA2&YB3%XC4@')),
-      ...(this.make_lvls('N1$XA2&YB3%XC4@')),
-      ...(this.make_lvls('.N1$X,A2&Y-B3%X+C4@')),
-    ]; 
-    
+    // Initialize Font Awesome icon lists
+    this.icons = {
+      animals: [
+        "dog", "cat", "fish", "dove", "dragon", "horse", "spider",
+        "frog", "paw", "otter", "elephant", "hippo", "kiwi-bird", "rabbit"
+      ].sort((a, b) => Math.random() - 0.5),
+
+      shapes: [
+        "heart", "star", "circle", "square", "gem", "cube",
+        "exclamation-triangle", "play", "stop", "pause", "angle-right", "angle-left"
+      ].sort((a, b) => Math.random() - 0.5),
+
+      objects: [
+        "car", "apple-alt", "music", "anchor", "bicycle", "book",
+        "camera", "chess", "cloud", "coffee", "envelope", "flask",
+        "guitar", "laptop", "mobile", "pencil-alt"
+      ].sort((a, b) => Math.random() - 0.5),
+
+      symbols: [
+        "smile", "sun", "moon", "bolt", "cloud", "snowflake",
+        "umbrella", "feather", "leaf", "water", "fire", "rainbow",
+        "yin-yang", "peace", "infinity"
+      ].sort((a, b) => Math.random() - 0.5),
+    };
+
+    this.mixed_icons = {
+      anim_sym: [...this.icons.animals, ...this.icons.symbols].sort((a, b) => Math.random() - 0.5),
+      anim_shap: [...this.icons.animals, ...this.icons.shapes].sort((a, b) => Math.random() - 0.5),
+      shap_obj: [...this.icons.shapes, ...this.icons.objects].sort((a, b) => Math.random() - 0.5),
+      obj_sym: [...this.icons.objects, ...this.icons.shapes].sort((a, b) => Math.random() - 0.5),
+    };
+
+    this.levels = [
+      ...(this.make_lvls(this.icons.shapes)),
+      ...(this.make_lvls(this.icons.symbols)),
+      ...(this.make_lvls(this.icons.objects)),
+      ...(this.make_lvls(this.icons.animals)),
+      ...(this.make_lvls(this.mixed_icons.anim_sym)),
+      ...(this.make_lvls(this.mixed_icons.anim_shap)),
+      ...(this.make_lvls(this.mixed_icons.shap_obj)),
+      ...(this.make_lvls(this.mixed_icons.obj_sym)),
+    ];
+
     // save stats
     GameStorage.save('total_levels', this.levels.length);
   }

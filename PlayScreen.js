@@ -145,10 +145,23 @@ class PlayScreen extends BaseScreen {
     GameStorage.save('total_time', this.play_time + Number(GameStorage.read('total_time', 0)));
 
 
+
+
+    // save accuracy  
+    // 1-(x-y)/y
+    let accuracy = 1 - ((this.wrong_reveal_count - this.reveal_count) / this.reveal_count);
+
+    // bounding 
+    accuracy = Math.min(Math.max(accuracy, 0), 1);
+
+    const db_acc = Number(GameStorage.read('accuracy', 1));
+    GameStorage.save('accuracy', (accuracy + db_acc) / 2);
+
+
     // delay a bit before showing the message 
     setTimeout(() => {
       this.view.popups.notice.show('Won!',
-        `<p>You have revealed a total of ${this.reveal_count*2} cards in ${this.play_time/1000} seconds. And wrong reveals count is ${this.wrong_reveal_count}. Click 'Next Level' to proceed!</p>`,
+        `<p>You have revealed a total of ${this.reveal_count*2} cards in ${this.play_time/1000} seconds. And wrong reveals count is ${this.wrong_reveal_count*2}. Therefore, accuracy is ${Math.floor(accuracy*100)}%. Click 'Next Level' to proceed!</p>`,
         [
           {
             name: 'Next Level',

@@ -102,8 +102,10 @@ class StatsScreen extends BaseScreen {
   load_map() {
     const data = [
       { name: 'Highest Level', def_value: 0, value: GameStorage.read('last_level_index', 0), id: 'last_level_index', desc: 'This shows how far you are by indicating the highest level so far.' },
+
       { name: 'Total Reveals', def_value: 0, value: GameStorage.read('total_reveals', 0), id: 'total_reveals', desc: 'This shows how many pairs of cards you have revealed in total.' },
       { name: 'Total Wrong Reveals', def_value: 0, value: GameStorage.read('total_wrong_reveals', 0), id: 'total_wrong_reveals', desc: 'This shows how many pairs of cards you have revealed WRONGLY in total.' },
+      { name: 'Overall Accuracy', def_value: '0%', value: Math.floor(100 * Number(GameStorage.read('accuracy', 0))) + "%", id: 'accuracy', desc: 'This shows the overall accuracy of the gameplay.' },
 
       { name: 'Total Time', def_value: 0, value: Utils.parse_time(GameStorage.read('total_time', 0)), id: 'total_time', desc: 'This shows total time you have used playing this game.' },
 

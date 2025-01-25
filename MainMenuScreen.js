@@ -35,7 +35,10 @@ class MainMenuScreen extends BaseScreen {
       btn.innerText = v.name;
       btn.classList.add('mm_btn');
       // delay a bit, the run action 
-      btn.onclick = () => setTimeout(() => this.view.switch_to(v.scrn_name), 200);
+      btn.onclick = () => {
+        this.view.sound.click.play();
+        setTimeout(() => this.view.switch_to(v.scrn_name), 200);
+      };
       this.mm_box.append(btn);
     });
   }

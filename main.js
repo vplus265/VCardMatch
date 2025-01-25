@@ -1,4 +1,4 @@
-const game = new GameController();
-game.run();
-
-
+window.onload = _ => {
+  const game = new GameController();
+  game.run();
+}

@@ -45,9 +45,12 @@ class PlayScreen extends BaseScreen {
     pause_btn.classList.add('mm_btn', );
     pause_btn.innerText = 'Pause';
     pause_btn.style.fontSize = '14px';
-    pause_btn.onclick = () => setTimeout(() => {
-      this.view.switch_to('mainmenu');
-    }, 200);
+    pause_btn.onclick = () => {
+      this.view.sound.click.play();
+      setTimeout(() =>
+        this.view.switch_to('mainmenu'), 200);
+    }
+    
     this.gui_box.appendChild(pause_btn);
 
     let lvl_shower = document.createElement('button');
@@ -225,6 +228,8 @@ class PlayScreen extends BaseScreen {
     card.innerHTML = `<span class="fas fa-${card._value}"></span>`;
     card._revealed = true;
 
+    // sound 
+    this.view.sound.flip.play();
 
     // if we have last card
     if (this.last_card) {
@@ -256,6 +261,9 @@ class PlayScreen extends BaseScreen {
 
           // done veiling
           this.is_reveal_waiting = false;
+
+          // sound 
+          this.view.sound.flip.play();
         }, 1000);
       }
     } else {

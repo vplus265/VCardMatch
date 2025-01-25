@@ -39,9 +39,11 @@ class StatsScreen extends BaseScreen {
     pause_btn.classList.add('mm_btn');
     pause_btn.innerText = 'Back';
     pause_btn.style.fontSize = '14px';
-    pause_btn.onclick = () => setTimeout(() => {
-      this.view.switch_to('mainmenu');
-    }, 200);
+    pause_btn.onclick = () => {
+      this.view.sound.click.play();
+      setTimeout(() =>
+        this.view.switch_to('mainmenu'), 200);
+    }
     this.gui_box.appendChild(pause_btn);
 
     // the reset button
@@ -49,31 +51,35 @@ class StatsScreen extends BaseScreen {
     reset_btn.classList.add('mm_btn');
     reset_btn.innerText = 'Reset all';
     reset_btn.style.fontSize = '14px';
-    reset_btn.onclick = () => setTimeout(() => {
-      this.view.popups.notice.show(
-        'WARNING!',
-        '<p>Resetting will delete your whole progress, everything you have done so far.</p><p>Are you sure you want to delete?</p>',
+    reset_btn.onclick = () => {
+      this.view.sound.click.play();
+      setTimeout(() => {
+        this.view.popups.notice.show(
+          'WARNING!',
+          '<p>Resetting will delete your whole progress, everything you have done so far.</p><p>Are you sure you want to delete?</p>',
         [
-          { name: 'Cancel', action: () => 0 },
+            { name: 'Cancel', action: () => 0 },
 
-          {
-            name: 'Yes, Delete!',
-            action: () => {
-              GameStorage.clear();
+            {
+              name: 'Yes, Delete!',
+              action: () => {
+                GameStorage.clear();
 
-              // refresh the play screen 
-              this.view.screens.play.refresh();
-              // and hide it, since refresh will show it
-              this.view.screens.play.hide();
+                // refresh the play screen 
+                this.view.screens.play.refresh();
+                // and hide it, since refresh will show it
+                this.view.screens.play.hide();
 
-              // refresh this stats screen 
-              this.hide();
-              this.show();
-            }
+                // refresh this stats screen 
+                this.hide();
+                this.show();
+              }
           }, // Yes button
         ]
-      );
-    }, 200);
+        );
+      }, 200);
+    }
+
     this.gui_box.appendChild(reset_btn);
   }
 
@@ -134,33 +140,37 @@ class StatsScreen extends BaseScreen {
       reset_btn.style = 'padding:0.5em; font-size: inherit';
 
       // perform the reset after 200 milliseconds
-      reset_btn.onclick = () => setTimeout(() => {
-        this.view.popups.notice.show(
-          'WARNING!',
-          `<p>Resetting '${v.name}' will reset whole thing from database to it's default value; You cannot undo.</p> <p>This will also reset the Play Screen.</p> <p>Are you sure you want to delete?</p>`,
+      reset_btn.onclick = () => {
+        this.view.sound.click.play();
+        setTimeout(() => {
+
+          this.view.popups.notice.show(
+            'WARNING!',
+            `<p>Resetting '${v.name}' will reset whole thing from database to it's default value; You cannot undo.</p> <p>This will also reset the Play Screen.</p> <p>Are you sure you want to delete?</p>`,
         [
             // cancel does nothing 
-            { name: 'Cancel', action: _ => _ },
+              { name: 'Cancel', action: _ => _ },
 
-            {
-              name: 'Yes, Reset!',
-              action: () => {
-                // reset to default
-                GameStorage.save(v.id, v.def_value);
+              {
+                name: 'Yes, Reset!',
+                action: () => {
+                  // reset to default
+                  GameStorage.save(v.id, v.def_value);
 
-                // refresh the play screen 
-                this.view.screens.play.refresh();
-                // and hide it, since refresh will show it
-                this.view.screens.play.hide();
+                  // refresh the play screen 
+                  this.view.screens.play.refresh();
+                  // and hide it, since refresh will show it
+                  this.view.screens.play.hide();
 
-                // refresh this stats screen 
-                this.hide();
-                this.show();
-              }
+                  // refresh this stats screen 
+                  this.hide();
+                  this.show();
+                }
           }, // Yes button
         ]
-        );
-      }, 200);
+          );
+        }, 200);
+      }
 
       card.appendChild(reset_btn);
 

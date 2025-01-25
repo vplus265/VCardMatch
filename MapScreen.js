@@ -39,9 +39,11 @@ class MapScreen extends BaseScreen {
     pause_btn.classList.add('mm_btn', 'back_to_menu_btn');
     pause_btn.innerText = 'To Menu';
     pause_btn.style.fontSize = '14px';
-    pause_btn.onclick = () => setTimeout(() => {
-      this.view.switch_to('mainmenu');
-    }, 200);
+    pause_btn.onclick = () => {
+      this.view.sound.click.play();
+      setTimeout(() =>
+        this.view.switch_to('mainmenu'), 200);
+    };
     this.gui_box.appendChild(pause_btn);
 
     let outof = document.createElement('span');
@@ -86,11 +88,13 @@ class MapScreen extends BaseScreen {
 
       card._value = i;
 
-      card.onclick = () => setTimeout(() => {
-        this.view.screens.play.refresh(i);
-        this.view.switch_to('play');
-      }, 200);
-
+      card.onclick = () => {
+        this.view.sound.flip.play();
+        setTimeout(() => {
+          this.view.screens.play.refresh(i);
+          this.view.switch_to('play');
+        }, 200);
+      }
       card.innerText = `lvl ${i+1}`;
 
       this.cards_box.appendChild(card);

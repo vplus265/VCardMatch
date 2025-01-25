@@ -1,6 +1,7 @@
 class GameView {
   constructor(model) {
     this.model = model;
+    this.sound = new GameSound();
 
     this.el_id_count = 0;
 
@@ -70,7 +71,11 @@ class AboutScreen extends BaseScreen {
     this.to_menu_btn.classList.add('mm_btn', 'back_to_menu_btn');
     this.to_menu_btn.innerText = 'To Menu';
     this.to_menu_btn.style.fontSize = '14px';
-    this.to_menu_btn.onclick = () => setTimeout(() => this.view.switch_to('mainmenu'), 200);
+    this.to_menu_btn.onclick = () => {
+      this.view.sound.click.play();
+      setTimeout(() => this.view.switch_to('mainmenu'), 200);
+    }
+    
     this.about_box.appendChild(this.to_menu_btn);
   }
 
@@ -127,6 +132,7 @@ class NoticePopup extends BaseScreen {
       btn.innerText = v.name;
       btn.classList.add('popup_btn');
       btn.onclick = () => {
+        this.view.sound.click.play();
         setTimeout(() => {
           this.hide();
           v.action();

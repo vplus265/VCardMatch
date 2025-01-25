@@ -131,7 +131,9 @@ class PlayScreen extends BaseScreen {
 
   // called when a level is won
   win() {
-    // el_main.innerHTML = '';
+    // the sound effect
+    this.view.sound.win.play();
+    // the visual effect
     VisualEffects.confetti(el_main);
 
     // save level if this level is higher than any other won levels

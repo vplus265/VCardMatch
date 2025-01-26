@@ -6,7 +6,8 @@ class GameSound {
     this.win = new Audio('sounds/win.mp3');
     
     // bg sounds
-    this.bg01 = new Audio('sounds/bg01.mp3');
+    this.bg01 = new Audio('sounds/Velvet Serenity.mp3');
+    this.bg01.volume = 0.5;
     this.bg01.loop = true;
   }
 }

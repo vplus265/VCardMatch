@@ -36,3 +36,7 @@
 ### 008 [X] Add background music 
 
 ### 009 [ ] Implement better resource loading with progress bar
+
+### 010 [ ] Add settings screen 
+
+### 011 [ ] Add volume settings

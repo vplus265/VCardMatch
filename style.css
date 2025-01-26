@@ -8,6 +8,40 @@ body {
   font-family: 'Qontra', sans-serif;
 }
 
+.volume-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 20px;
+  outline: none;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  background-image: linear-gradient(to right, rgb(200, 80, 160), rgb(120, 0, 80));
+  border-radius: 0.5em;
+}
+
+.volume-slider::-webkit-volume-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.volume-slider:hover {
+  border: 1px solid white;
+  box-shadow: 0 0 0.5em #780050;
+}
+
+
+
 #el_main {
   display: flex;
   flex-direction: column;

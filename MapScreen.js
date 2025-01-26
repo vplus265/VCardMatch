@@ -40,7 +40,7 @@ class MapScreen extends BaseScreen {
     pause_btn.innerText = 'To Menu';
     pause_btn.style.fontSize = '14px';
     pause_btn.onclick = () => {
-      this.view.sound.click.play();
+      this.view.sound.play('click');
       setTimeout(() =>
         this.view.switch_to('mainmenu'), 200);
     };
@@ -89,7 +89,7 @@ class MapScreen extends BaseScreen {
       card._value = i;
 
       card.onclick = () => {
-        this.view.sound.flip.play();
+        this.view.sound.play('flip');
         setTimeout(() => {
           this.view.screens.play.refresh(i);
           this.view.switch_to('play');

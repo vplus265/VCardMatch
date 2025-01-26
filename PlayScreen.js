@@ -46,11 +46,11 @@ class PlayScreen extends BaseScreen {
     pause_btn.innerText = 'Pause';
     pause_btn.style.fontSize = '14px';
     pause_btn.onclick = () => {
-      this.view.sound.click.play();
+      this.view.sound.play('click');
       setTimeout(() =>
         this.view.switch_to('mainmenu'), 200);
     }
-    
+
     this.gui_box.appendChild(pause_btn);
 
     let lvl_shower = document.createElement('button');
@@ -132,7 +132,7 @@ class PlayScreen extends BaseScreen {
   // called when a level is won
   win() {
     // the sound effect
-    this.view.sound.win.play();
+    this.view.sound.play('win');
     // the visual effect
     VisualEffects.confetti(el_main);
 
@@ -231,7 +231,7 @@ class PlayScreen extends BaseScreen {
     card._revealed = true;
 
     // sound 
-    this.view.sound.flip.play();
+    this.view.sound.play('flip');
 
     // if we have last card
     if (this.last_card) {
@@ -265,7 +265,7 @@ class PlayScreen extends BaseScreen {
           this.is_reveal_waiting = false;
 
           // sound 
-          this.view.sound.flip.play();
+          this.view.sound.play('flip');
         }, 1000);
       }
     } else {

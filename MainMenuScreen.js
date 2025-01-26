@@ -27,6 +27,7 @@ class MainMenuScreen extends BaseScreen {
       { name: 'Play', scrn_name: 'play' },
       { name: 'Map', scrn_name: 'map' },
       { name: 'Stats', scrn_name: 'stats' },
+      { name: 'Setting', scrn_name: 'settings' },
       { name: 'About', scrn_name: 'about' },
       ];
 
@@ -36,7 +37,7 @@ class MainMenuScreen extends BaseScreen {
       btn.classList.add('mm_btn');
       // delay a bit, the run action 
       btn.onclick = () => {
-        this.view.sound.click.play();
+        this.view.sound.play('click') ;
         setTimeout(() => this.view.switch_to(v.scrn_name), 200);
       };
       this.mm_box.append(btn);

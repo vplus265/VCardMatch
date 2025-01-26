@@ -12,7 +12,8 @@ class GameView {
       'play': new PlayScreen(this),
       'mainmenu': new MainMenuScreen(this),
       'map': new MapScreen(this),
-      'stats': new StatsScreen(this)
+      'stats': new StatsScreen(this), 
+      'settings': new SettingsScreen(this)
     };
 
     this.popups = {
@@ -72,7 +73,7 @@ class AboutScreen extends BaseScreen {
     this.to_menu_btn.innerText = 'To Menu';
     this.to_menu_btn.style.fontSize = '14px';
     this.to_menu_btn.onclick = () => {
-      this.view.sound.click.play();
+      this.view.sound.play('click');
       setTimeout(() => this.view.switch_to('mainmenu'), 200);
     }
     
@@ -132,7 +133,7 @@ class NoticePopup extends BaseScreen {
       btn.innerText = v.name;
       btn.classList.add('popup_btn');
       btn.onclick = () => {
-        this.view.sound.click.play();
+        this.view.sound.play('click');
         setTimeout(() => {
           this.hide();
           v.action();

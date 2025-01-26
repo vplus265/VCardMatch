@@ -40,7 +40,7 @@ class StatsScreen extends BaseScreen {
     pause_btn.innerText = 'Back';
     pause_btn.style.fontSize = '14px';
     pause_btn.onclick = () => {
-      this.view.sound.click.play();
+      this.view.sound.play('click') ;
       setTimeout(() =>
         this.view.switch_to('mainmenu'), 200);
     }
@@ -52,7 +52,7 @@ class StatsScreen extends BaseScreen {
     reset_btn.innerText = 'Reset all';
     reset_btn.style.fontSize = '14px';
     reset_btn.onclick = () => {
-      this.view.sound.click.play();
+      this.view.sound.play('click');
       setTimeout(() => {
         this.view.popups.notice.show(
           'WARNING!',
@@ -141,7 +141,7 @@ class StatsScreen extends BaseScreen {
 
       // perform the reset after 200 milliseconds
       reset_btn.onclick = () => {
-        this.view.sound.click.play();
+        this.view.sound.play('click') ;
         setTimeout(() => {
 
           this.view.popups.notice.show(

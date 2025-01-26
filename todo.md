@@ -6,9 +6,10 @@
 #### Done (12 January, 2025)
 - Changed notice popup to accept multiple buttons, and added a reset button in stats screen.
 
-### 002 [ ] Add Sound Effects
+### 002 [X] Add Sound Effects
 - Add sound effects for the click of cards
-#### Done?? 
+#### Done
+- Now buttons and cards has sounds
 
 ### 003 [X] Add Win or Lose Effects (16 January 2025)
 - When one wins, show fire works
@@ -31,3 +32,5 @@
 ### 007 [X] Add accuracy stat (18 January 2025)
 #### Done (19 January, 2025)
 - Added accuracy, and it is calculated and saved at the end of the Game 
+
+### 008 [ ] Add background music 

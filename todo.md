@@ -33,4 +33,6 @@
 #### Done (19 January, 2025)
 - Added accuracy, and it is calculated and saved at the end of the Game 
 
-### 008 [ ] Add background music 
+### 008 [X] Add background music 
+
+### 009 [ ] Implement better resource loading with progress bar

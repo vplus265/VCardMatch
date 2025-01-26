@@ -2,7 +2,6 @@ class GameController {
   constructor() {
     this.STATE_START_RUNNING = 0;
     this.STATE_RUNNING = 1;
-
     this.STATE_PAUSED = 2;
 
     this.state = this.STATE_START_RUNNING;
@@ -22,14 +21,16 @@ class GameController {
     switch (this.state) {
       // this should be once 
       case this.STATE_START_RUNNING: {
-        // reset
+        // welcome message! 
+        this.view.popups.notice.show('Welcome!', '<p>Click start to start the game!</p>', [
+          { name: 'Start', action: () => this.view.sound.bg01.play() }
+        ]);
 
         // draw the graphics once
         this.view.show();
 
         // move to running state
         this.state = this.STATE_RUNNING;
-
         break;
       }
 

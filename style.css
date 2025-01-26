@@ -1,5 +1,11 @@
+@font-face {
+  font-family: 'Qontra';
+  src: url('fonts/Qontra.otf') format('opentype');
+}
+
 body {
   margin: 0;
+  font-family: 'Qontra', sans-serif;
 }
 
 #el_main {
